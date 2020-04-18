@@ -41,7 +41,7 @@ namespace RPG_Item_Generator.Generator
 
         public List<PropertyDefinition> GetUsableProperties(List<int> propertyTypes)
         {
-            var result = Properties.Where(x => propertyTypes.Contains(x.Type)).ToList();
+            var result = Properties.Where(x => propertyTypes.Contains(x.TypeId)).ToList();
 
             return result;
 
@@ -50,7 +50,7 @@ namespace RPG_Item_Generator.Generator
 
         public List<RaretyDefinition> GetUsableRarities(List<int> rarityTypes)
         {
-            var result = Rarities.Where(x => rarityTypes.Contains(x.Type)).ToList();
+            var result = Rarities.Where(x => rarityTypes.Contains(x.TypeId)).ToList();
 
             return result;
         }

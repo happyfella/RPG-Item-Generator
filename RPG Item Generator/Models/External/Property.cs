@@ -6,7 +6,7 @@ namespace RPG_Item_Generator.Models.External
 {
     public class Property
     {
-        public int Type { get; set; }
+        public int TypeId { get; set; }
 
         public string Name { get; set; }
 

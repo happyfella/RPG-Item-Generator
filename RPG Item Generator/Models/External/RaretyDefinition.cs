@@ -9,7 +9,7 @@ namespace RPG_Item_Generator.Models.External
         /// <summary>
         /// If you are using an enum, pass the enum value.
         /// </summary>
-        public int Type { get; set; }
+        public int TypeId { get; set; }
 
         /// <summary>
         /// Display name of the rarity.

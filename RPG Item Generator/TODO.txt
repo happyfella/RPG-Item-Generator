@@ -1,4 +1,17 @@
-﻿Generated item property count should take the rarity into account, this will go along with the minimum and maximum explicit properties
-Make it so the item level is generated close to the level passed in to the item generator
-Defensive code in all that is received from the client, handle the issues
-Dynamic Naming based on properties
+﻿
+Pending:
+
+
+
+Working:
+	Generated item property count should take the rarity into account, this will go along with the minimum and maximum explicit properties
+	Make it so the item level is generated close to the level passed in to the item generator
+	Item level should work with 
+	Defensive code in all that is received from the client, handle the issues
+	Dynamic Naming based on properties
+	Move any math calcs to it's own service
+	Add summary comments to models
+	Add Value calculation to Calculation Service
+
+
+Complete:

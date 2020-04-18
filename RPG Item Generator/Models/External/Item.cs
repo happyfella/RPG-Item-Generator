@@ -7,22 +7,44 @@ namespace RPG_Item_Generator.Models.External
 {
     public class Item
     {
-        public int Type { get; set; }
+        /// <summary>
+        /// TypeId from the ItemDefinition that was passed through the Item Generator.
+        /// </summary>
+        public int TypeId { get; set; }
 
-        public int SubType { get; set; }
+        /// <summary>
+        /// CategoryId from the ItemDefinition that was passed through the Item Generator.
+        /// </summary>
+        public int CategoryId { get; set; }
 
+        /// <summary>
+        /// Generated item level.
+        /// </summary>
         public int ItemLevel { get; set; }
 
-        public int RarityType { get; set; }
+        /// <summary>
+        /// Generated Rarity TypeId
+        /// </summary>
+        public int RarityTypeId { get; set; }
 
+        /// <summary>
+        /// Generated Rarity name
+        /// </summary>
         public string RarityName { get; set; }
 
+        /// <summary>
+        /// Generated item name.
+        /// </summary>
         public string ItemName { get; set; }
 
+        /// <summary>
+        /// ItemDescription from the ItemDefinition that was passed through the Item Generator.
+        /// </summary>
         public string ItemDescription { get; set; }
 
-        //public double DamagePerSecond { get; set; } // Not sure on this one yet
-
+        /// <summary>
+        /// 
+        /// </summary>
         public List<Property> Properties { get; set; }
     }
 }

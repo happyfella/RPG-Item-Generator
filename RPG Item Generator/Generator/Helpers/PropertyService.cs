@@ -12,7 +12,6 @@ namespace RPG_Item_Generator.Generator.Helpers
         static public List<Property> GenerateProperties(List<int> propertyTypes, Rarity rarity, Initializer initializer)
         {
             var result = new List<Property>();
-            var random = new Random();
             var properties = initializer.GetUsableProperties(propertyTypes);
 
             // TODO: take weight into account for both number of properties on the item and the values
@@ -33,11 +32,11 @@ namespace RPG_Item_Generator.Generator.Helpers
             // Generate explicit properties
             var propertiesTaken = 0;
             var availableExplicitProperties = properties.Where(x => x.ImplicitProperty == false).ToList();
-            var explicitPropertyCount = random.Next(rarity.MinimumExplicitProperties, rarity.MaximumExplicitProperties + 1);
+            var explicitPropertyCount = CalculationService.GetRandomInteger(rarity.MinimumExplicitProperties, rarity.MaximumExplicitProperties, false);
 
             while (explicitPropertyCount > propertiesTaken && availableExplicitProperties.Count > 0)
             {
-                var index = random.Next(0, availableExplicitProperties.Count);
+                var index = CalculationService.GetRandomInteger(0, availableExplicitProperties.Count, true);
                 var propertyToAdd = availableExplicitProperties[index];
                 var propertyValue = GenerateItemPropertyValue(propertyToAdd);
 
@@ -54,19 +53,18 @@ namespace RPG_Item_Generator.Generator.Helpers
         static private PropertyValue GenerateItemPropertyValue(PropertyDefinition property)
         {
             var result = new PropertyValue();
-            var random = new Random();
 
             if (property.IsValueRanged)
             {
                 result.Value = 0;
-                result.MinimumValue = random.Next(property.BaseMinimumValue, (property.BaseMaximumValue / 2) - 1);
-                result.MaximumValue = random.Next(property.BaseMaximumValue / 2, property.BaseMaximumValue);
+                result.MinimumValue = CalculationService.GetRandomInteger(property.BaseMinimumValue, (property.BaseMaximumValue / 2), false);
+                result.MaximumValue = CalculationService.GetRandomInteger(property.BaseMaximumValue / 2, property.BaseMaximumValue, false);
             }
             else
             {
                 result.MinimumValue = 0;
                 result.MaximumValue = 0;
-                result.Value = random.Next(property.BaseMinimumValue, property.BaseMaximumValue);
+                result.Value = CalculationService.GetRandomInteger(property.BaseMinimumValue, property.BaseMaximumValue, false);
             }
 
             return result;
@@ -76,7 +74,7 @@ namespace RPG_Item_Generator.Generator.Helpers
         {
             var resultProperty = new Property();
 
-            resultProperty.Type = property.Type;
+            resultProperty.TypeId = property.TypeId;
             resultProperty.Name = property.Name;
             resultProperty.MinimumValue = propertyValue.MinimumValue;
             resultProperty.MaximumValue = propertyValue.MaximumValue;

@@ -9,8 +9,7 @@ namespace RPG_Item_Generator.Generator.Helpers
     {
         static public int GenerateItemLevel(ItemDefinition definition, int level)
         {
-            var random = new Random();
-            var result = random.Next(definition.MinimumDropLevel, definition.MaximumDropLevel + 1);
+            var result = CalculationService.GetRandomInteger(definition.MinimumDropLevel, definition.MaximumDropLevel, false);
             return result;
         }
     }

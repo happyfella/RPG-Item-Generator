@@ -11,13 +11,12 @@ namespace RPG_Item_Generator.Generator.Helpers
     {
         static public Rarity ChooseRarity(List<int> itemRarety, Initializer initializer)
         {
-            var random = new Random();
             var result = new Rarity();
             var chosenRarity = new RaretyDefinition();
 
             var usableRarities = initializer.GetUsableRarities(itemRarety).OrderByDescending(x => x.DropWeight);
             var highestRarityValue = usableRarities.FirstOrDefault();
-            var brokerValue = Math.Round(random.NextDouble(), 2);
+            var brokerValue = Math.Round(CalculationService.GetRandomDouble(), 2);
 
             if (brokerValue > highestRarityValue.DropWeight)
             {
@@ -32,7 +31,7 @@ namespace RPG_Item_Generator.Generator.Helpers
                 }
             }
 
-            result.Type = chosenRarity.Type;
+            result.TypeId = chosenRarity.TypeId;
             result.Name = chosenRarity.Name;
             result.MinimumExplicitProperties = chosenRarity.MinimumExplicitProperties;
             result.MaximumExplicitProperties = chosenRarity.MaximumExplicitProperties;

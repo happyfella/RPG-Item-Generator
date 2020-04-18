@@ -6,9 +6,9 @@ namespace RPG_Item_Generator.Models.External
 {
     public class ItemDefinition
     {
-        public int Type { get; set; }
+        public int TypeId { get; set; }
 
-        public int SubType { get; set; }
+        public int CategoryId { get; set; }
 
         public string Name { get; set; }
 

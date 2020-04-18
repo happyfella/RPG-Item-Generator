@@ -27,12 +27,10 @@ namespace RPG_Item_Generator.Generator
     public class ItemGenerator : IItemGenerator
     {
         private readonly Initializer initializer;
-        private readonly Random random;
 
         public ItemGenerator()
         {
             initializer = new Initializer();
-            random = new Random();
         }
 
         public bool Initialize(ItemGeneratorConfig config)
@@ -50,7 +48,7 @@ namespace RPG_Item_Generator.Generator
             // Choose item definition
             var definitions = initializer.GetUsableDefinitions(level);
             var definitionCount = definitions.Count();
-            var itemDefinitionIndex = random.Next(0, definitionCount);
+            var itemDefinitionIndex = CalculationService.GetRandomInteger(0, definitionCount, true);
             var itemDefinition = definitions[itemDefinitionIndex];
 
             // Generate values
@@ -60,10 +58,10 @@ namespace RPG_Item_Generator.Generator
             var itemProperties = PropertyService.GenerateProperties(itemDefinition.Properties, itemRarity, initializer);
 
             // Map item result
-            result.Type = itemDefinition.Type;
-            result.SubType = itemDefinition.SubType;
+            result.TypeId = itemDefinition.TypeId;
+            result.CategoryId = itemDefinition.CategoryId;
             result.ItemLevel = itemLevel;
-            result.RarityType = itemRarity.Type;
+            result.RarityTypeId = itemRarity.TypeId;
             result.RarityName = itemRarity.Name;
             result.ItemName = itemDefinition.Name; // TODO: possibly use itemName that was generated
             result.ItemDescription = itemDefinition.Description;

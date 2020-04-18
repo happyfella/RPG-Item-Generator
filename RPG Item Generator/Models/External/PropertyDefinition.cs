@@ -9,7 +9,7 @@ namespace RPG_Item_Generator.Models.External
     /// </summary>
     public class PropertyDefinition
     {
-        public int Type { get; set; }
+        public int TypeId { get; set; }
 
         public string Name { get; set; }
 
@@ -19,7 +19,7 @@ namespace RPG_Item_Generator.Models.External
         public bool ImplicitProperty { get; set; }
 
         /// <summary>
-        /// Value from 0 to 1
+        /// Scales the values with help from the item level. Currently not implemented
         /// </summary>
         public double ValueScale { get; set; }
 
