@@ -12,7 +12,8 @@ Working:
 	Move any math calcs to it's own service
 	Add summary comments to models
 	Add Value calculation to Calculation Service
-	Add consumable items
+	Add execution path for consumable items
+	Use static value from property definition in calculations for both consumable and non-consumable items. 
 
 
 Complete:
