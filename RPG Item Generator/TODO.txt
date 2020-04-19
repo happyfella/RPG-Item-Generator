@@ -12,6 +12,7 @@ Working:
 	Move any math calcs to it's own service
 	Add summary comments to models
 	Add Value calculation to Calculation Service
+	Add consumable items
 
 
 Complete:

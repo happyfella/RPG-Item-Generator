@@ -19,14 +19,24 @@ namespace RPG_Item_Generator.Models.External
         public int MaximumDropLevel { get; set; }
 
         /// <summary>
-        /// This will allow an item to generate regardless of MaximumDropLevel
+        /// This will allow an item to generate regardless of MaximumDropLevel while maintaining the MinimumDropLevel integrety
         /// </summary>
-        public bool IgnorMaximumDropLevel { get; set; }
+        public bool IgnoreMaximumDropLevel { get; set; }
 
+        /// <summary>
+        /// Ignores MinimumDropLevel and MaximumDropLevel. This should only be used for consumable items (Gold, Health Potions...) that will drop throughout the game lifecycle.
+        /// Returned Item Level will be 0 if this is true. Properties still apply, but should only be Implicit Properties since Explicit Properties
+        /// will be ignored.
+        /// </summary>
+        public bool Consumable { get; set; }
+
+        /// <summary>
+        /// List of Property Id's that are allowed to be picked for the item when generating.
+        /// </summary>
         public List<int> Properties { get; set; }
 
         /// <summary>
-        /// Droprate for all rarities should add up to 1
+        /// List of Rarity Id's that are allowed to be picked for the item when generating.
         /// </summary>
         public List<int> Rarities { get; set; }
     }

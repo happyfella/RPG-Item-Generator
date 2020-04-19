@@ -27,7 +27,7 @@ namespace RPG_Item_Generator.Generator
 
         public List<ItemDefinition> GetUsableDefinitions(int level)
         {
-            var result = Definitions.Where(x => x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && x.IgnorMaximumDropLevel == false || x.MinimumDropLevel <= level && x.IgnorMaximumDropLevel).ToList();
+            var result = Definitions.Where(x => (x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && !x.IgnoreMaximumDropLevel || x.MinimumDropLevel <= level && x.IgnoreMaximumDropLevel) && !x.Consumable).ToList();
 
             return result;
                 

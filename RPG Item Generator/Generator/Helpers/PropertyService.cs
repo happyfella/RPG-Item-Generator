@@ -54,16 +54,17 @@ namespace RPG_Item_Generator.Generator.Helpers
         {
             var result = new PropertyValue();
 
+            result.MinimumValue = 0;
+            result.MaximumValue = 0;
+            result.Value = 0;
+
             if (property.IsValueRanged)
             {
-                result.Value = 0;
                 result.MinimumValue = CalculationService.GetRandomInteger(property.BaseMinimumValue, (property.BaseMaximumValue / 2), false);
                 result.MaximumValue = CalculationService.GetRandomInteger(property.BaseMaximumValue / 2, property.BaseMaximumValue, false);
             }
             else
             {
-                result.MinimumValue = 0;
-                result.MaximumValue = 0;
                 result.Value = CalculationService.GetRandomInteger(property.BaseMinimumValue, property.BaseMaximumValue, false);
             }
 

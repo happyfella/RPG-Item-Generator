@@ -36,5 +36,15 @@ namespace RPG_Item_Generator.Models.External
         /// How often this property will be on an item. Value from 0 to 1
         /// </summary>
         public double Wieght { get; set; }
+
+        /// <summary>
+        /// Hard value that will be set to the property with no additional random generating.
+        /// </summary>
+        public int StaticValue { get; set; }
+
+        /// <summary>
+        /// Flag for StaticValue. True: will apply the StaticValue to the property. False: Will not apply the StaticValue to the property.
+        /// </summary>
+        public bool SetStaticValue { get; set; }
     }
 }

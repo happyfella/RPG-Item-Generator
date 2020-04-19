@@ -51,21 +51,28 @@ namespace RPG_Item_Generator.Generator
             var itemDefinitionIndex = CalculationService.GetRandomInteger(0, definitionCount, true);
             var itemDefinition = definitions[itemDefinitionIndex];
 
-            // Generate values
-            var itemLevel = LevelService.GenerateItemLevel(itemDefinition, level);
-            var itemRarity = RarityService.ChooseRarity(itemDefinition.Rarities, initializer);
-            var itemName = NameService.GenerateItemName(); // TODO: need to dynamicall change the name possibly
-            var itemProperties = PropertyService.GenerateProperties(itemDefinition.Properties, itemRarity, initializer);
+            if(!itemDefinition.Consumable)
+            {
+                // Generate values
+                var itemLevel = LevelService.GenerateItemLevel(itemDefinition, level);
+                var itemRarity = RarityService.ChooseRarity(itemDefinition.Rarities, initializer);
+                var itemName = NameService.GenerateItemName(); // TODO: need to dynamicall change the name possibly
+                var itemProperties = PropertyService.GenerateProperties(itemDefinition.Properties, itemRarity, initializer);
 
-            // Map item result
-            result.TypeId = itemDefinition.TypeId;
-            result.CategoryId = itemDefinition.CategoryId;
-            result.ItemLevel = itemLevel;
-            result.RarityTypeId = itemRarity.TypeId;
-            result.RarityName = itemRarity.Name;
-            result.ItemName = itemDefinition.Name; // TODO: possibly use itemName that was generated
-            result.ItemDescription = itemDefinition.Description;
-            result.Properties = itemProperties;
+                // Map item result
+                result.TypeId = itemDefinition.TypeId;
+                result.CategoryId = itemDefinition.CategoryId;
+                result.ItemLevel = itemLevel;
+                result.RarityTypeId = itemRarity.TypeId;
+                result.RarityName = itemRarity.Name;
+                result.ItemName = itemDefinition.Name; // TODO: possibly use itemName that was generated
+                result.ItemDescription = itemDefinition.Description;
+                result.Properties = itemProperties;
+            }
+            else
+            {
+                // TODO: Consumable generation
+            }
             
             return result;
         }
