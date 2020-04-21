@@ -23,12 +23,12 @@ namespace RPG_Item_Generator.Models.External
         public int ItemLevel { get; set; }
 
         /// <summary>
-        /// Generated Rarity TypeId
+        /// Generated Rarity TypeId.
         /// </summary>
         public int RarityTypeId { get; set; }
 
         /// <summary>
-        /// Generated Rarity name
+        /// Generated Rarity name.
         /// </summary>
         public string RarityName { get; set; }
 
@@ -43,7 +43,7 @@ namespace RPG_Item_Generator.Models.External
         public string ItemDescription { get; set; }
 
         /// <summary>
-        /// 
+        /// Generated item properties.
         /// </summary>
         public List<Property> Properties { get; set; }
     }

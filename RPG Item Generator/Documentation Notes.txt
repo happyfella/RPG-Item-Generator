@@ -1,0 +1,25 @@
+﻿* Property Definition
+	* SetStaticValue and StaticValue only apply to properties with IsValueRanged set to false. If IsValueRanged is set to true, SetStaticValue 
+	  and StaticValue will be ignored. 
+
+
+* Item Definition
+	* IsConsumable is used for items expected as consumable items. Examples... Gold, Health Refills, Mana Refills, Gems. MinimumDropLevel and MaximumDropLevel
+	  still apply for these items. If you want these items to drop through the lifecycle of the game, set the MinimumDropLevel to 1 and set IgnoreMaximumDropLevel
+	  to True. This is not intended for durability, durability should be passed in as a property definition currently if you require it.
+
+
+* Initialization
+
+
+* Initialization Validation
+	* Soft failures (Warnings)
+		Will still generate an item even if warnings are present. Will have a Passed value of true.
+	* Hard failures (Erros)
+		Will not generate an item with an error count greater than 0. Will have a Passed value of false.
+	*Consumable Items
+		Will validate if it has Explicit Properties. They are not intended to have Explicit Properties, as such Explicit Properties will be ignored during item generation.
+
+
+* Returned Item Object
+	* It's recommended to map this to your own object once you receive the generated item.

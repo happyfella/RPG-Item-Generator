@@ -7,9 +7,9 @@ namespace RPG_Item_Generator.Models.External
     public class RaretyDefinition
     {
         /// <summary>
-        /// If you are using an enum, pass the enum value.
+        /// The Id for the generated property.
         /// </summary>
-        public int TypeId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Display name of the rarity.

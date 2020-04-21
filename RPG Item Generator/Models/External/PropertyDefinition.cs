@@ -9,8 +9,15 @@ namespace RPG_Item_Generator.Models.External
     /// </summary>
     public class PropertyDefinition
     {
-        public int TypeId { get; set; }
+        /// <summary>
+        /// Unique Id for the Property Definition. Used for error handling, will not be returned. 
+        /// Unique is not enforced, but will assist if you receive any errors or warnings with a referenced Id.
+        /// </summary>
+        public int Id { get; set; }
 
+        /// <summary>
+        /// The Name for the generated property.
+        /// </summary>
         public string Name { get; set; }
 
         /// <summary>
@@ -23,9 +30,15 @@ namespace RPG_Item_Generator.Models.External
         /// </summary>
         public double ValueScale { get; set; }
 
-        public int BaseMinimumValue { get; set; }
+        /// <summary>
+        /// The generated value will not fall below this value.
+        /// </summary>
+        public int MinimumValue { get; set; }
 
-        public int BaseMaximumValue { get; set; }
+        /// <summary>
+        /// The generated value will not exceed this value.
+        /// </summary>
+        public int MaximumValue { get; set; }
 
         /// <summary>
         /// Is the property value a range or single value. ie... value 2 - 11 or value 5
@@ -43,7 +56,8 @@ namespace RPG_Item_Generator.Models.External
         public int StaticValue { get; set; }
 
         /// <summary>
-        /// Flag for StaticValue. True: will apply the StaticValue to the property. False: Will not apply the StaticValue to the property.
+        /// Flag for StaticValue. True: will apply the StaticValue to the property. False: Will not apply the StaticValue to the property. Cannot be applied to
+        /// Ranged property value, only single value properties.
         /// </summary>
         public bool SetStaticValue { get; set; }
     }

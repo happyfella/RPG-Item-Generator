@@ -1,4 +1,5 @@
-﻿using RPG_Item_Generator.Models.External;
+﻿using RPG_Item_Generator.Generator.Validation;
+using RPG_Item_Generator.Models.External;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace RPG_Item_Generator.Generator
 {
-    class Initializer
+    internal class Initializer
     {
         private List<ItemDefinition> Definitions { get; set; }
 
@@ -14,23 +15,55 @@ namespace RPG_Item_Generator.Generator
 
         private List<RaretyDefinition> Rarities { get; set; }
 
-        public bool Init(ItemGeneratorConfig config)
+        public ConfigValidation Init(ItemGeneratorConfig config)
         {
-            var rarity = config.Items.Select(x => x.Rarities).ToList();
-            // Rarity Weight check
-            
-            Definitions = config.Items;
-            Properties = config.Properties;
-            Rarities = config.Rarities;
-            return true;
+            var validate = new ConfigValidator(config).Validation();
+            if(validate.Passed)
+            {
+                Definitions = config.ItemDefinitions;
+                Properties = config.PropertyDefinitions;
+                Rarities = config.RarityDefinitions;
+                return validate;
+            }
+            else
+            {
+                return validate;
+            }
         }
 
         public List<ItemDefinition> GetUsableDefinitions(int level)
         {
-            var result = Definitions.Where(x => (x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && !x.IgnoreMaximumDropLevel || x.MinimumDropLevel <= level && x.IgnoreMaximumDropLevel) && !x.Consumable).ToList();
+            var result = Definitions.Where(x => x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && !x.IgnoreMaximumDropLevel || x.MinimumDropLevel <= level && x.IgnoreMaximumDropLevel).ToList();
 
             return result;
                 
+            // TODO: need to throw an exception here instead of returning false
+        }
+
+        public List<ItemDefinition> GetUsableDefinitions(int level, bool consumable)
+        {
+            var result = Definitions.Where(x => (x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && !x.IgnoreMaximumDropLevel || x.MinimumDropLevel <= level && x.IgnoreMaximumDropLevel) && x.IsConsumable == consumable).ToList();
+
+            return result;
+
+            // TODO: need to throw an exception here instead of returning false
+        }
+
+        public List<ItemDefinition> GetUsableDefinitionsByTypeId(int level, int typeId)
+        {
+            var result = Definitions.Where(x => (x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && !x.IgnoreMaximumDropLevel || x.MinimumDropLevel <= level && x.IgnoreMaximumDropLevel) && x.TypeId == typeId).ToList();
+
+            return result;
+
+            // TODO: need to throw an exception here instead of returning false
+        }
+
+        public List<ItemDefinition> GetUsableDefinitionsByCategoryId(int level, int categoryId)
+        {
+            var result = Definitions.Where(x => (x.MinimumDropLevel <= level && x.MaximumDropLevel >= level && !x.IgnoreMaximumDropLevel || x.MinimumDropLevel <= level && x.IgnoreMaximumDropLevel) && x.CategoryId == categoryId).ToList();
+
+            return result;
+
             // TODO: need to throw an exception here instead of returning false
         }
 
@@ -41,7 +74,7 @@ namespace RPG_Item_Generator.Generator
 
         public List<PropertyDefinition> GetUsableProperties(List<int> propertyTypes)
         {
-            var result = Properties.Where(x => propertyTypes.Contains(x.TypeId)).ToList();
+            var result = Properties.Where(x => propertyTypes.Contains(x.Id)).ToList();
 
             return result;
 
@@ -50,7 +83,7 @@ namespace RPG_Item_Generator.Generator
 
         public List<RaretyDefinition> GetUsableRarities(List<int> rarityTypes)
         {
-            var result = Rarities.Where(x => rarityTypes.Contains(x.TypeId)).ToList();
+            var result = Rarities.Where(x => rarityTypes.Contains(x.Id)).ToList();
 
             return result;
         }

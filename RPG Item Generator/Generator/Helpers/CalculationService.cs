@@ -4,9 +4,9 @@ using System.Text;
 
 namespace RPG_Item_Generator.Generator.Helpers
 {
-    static class CalculationService
+    internal class CalculationService
     {
-        static public int GetRandomInteger(int min, int max, bool usedForIndexing)
+        public int GetRandomInteger(int min, int max, bool usedForIndexing)
         {
             var random = new Random();
 
@@ -15,7 +15,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             return random.Next(min, max);
         }
 
-        static public double GetRandomDouble()
+        public double GetRandomDouble()
         {
             var random = new Random();
             return random.NextDouble();

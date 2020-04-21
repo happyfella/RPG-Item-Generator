@@ -5,11 +5,18 @@ using System.Text;
 
 namespace RPG_Item_Generator.Generator.Helpers
 {
-    static class LevelService
+    internal class LevelService
     {
-        static public int GenerateItemLevel(ItemDefinition definition, int level)
+        private readonly CalculationService _calculationService;
+
+        public LevelService()
         {
-            var result = CalculationService.GetRandomInteger(definition.MinimumDropLevel, definition.MaximumDropLevel, false);
+            _calculationService = new CalculationService();
+        }
+
+        public int GenerateItemLevel(ItemDefinition definition, int level)
+        {
+            var result = _calculationService.GetRandomInteger(definition.MinimumDropLevel, definition.MaximumDropLevel, false);
             return result;
         }
     }
