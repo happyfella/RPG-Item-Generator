@@ -66,7 +66,7 @@ namespace RPG_Item_Generator.Generator.Validation
 
         private void ItemDefinitionValidation()
         {
-            // Validate Properties is a valid object with a count
+            // ERROR: Validate Properties is a valid object with a count
             if(_itemGeneratorConfig.ItemDefinitions == null || _itemGeneratorConfig.ItemDefinitions.Count < 1)
             {
                 Result.Errors.Add("ItemDefinitions list was null or had a count of 0.");

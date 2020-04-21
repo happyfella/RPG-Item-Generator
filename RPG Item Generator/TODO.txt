@@ -17,6 +17,7 @@ Working:
 	Instead of returning a new item if generation failed, maybe have a list of errors on the Item object that is returned
 	Handle what happends when a no rarities are specified in the Item Definition. Do I even want that to be possible, what about consumable items
 	Ignore Explicit properties for consumables
+	Find a better model name for ConfidValidation
 
 
 Future:

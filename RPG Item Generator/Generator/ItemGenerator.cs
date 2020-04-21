@@ -109,7 +109,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated
+            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
         }
 
         public Item GenerateConsumableItem(int level)
@@ -124,7 +124,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated
+            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
         }
 
         public Item GenerateItemOnTypeId(int level, int typeId)
@@ -139,7 +139,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated
+            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
         }
 
         public Item GenerateItemOnCategoryId(int level, int categoryId)
@@ -154,7 +154,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated
+            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
         }
 
         private Item GetItem(int level, List<ItemDefinition> definitions)
