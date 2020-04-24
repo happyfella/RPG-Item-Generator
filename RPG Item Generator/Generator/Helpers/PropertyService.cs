@@ -16,7 +16,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             _calculationService = new CalculationService();
         }
 
-        public List<Property> GenerateProperties(List<int> propertyTypes, Rarity rarity, Initializer initializer)
+        public List<Property> GenerateProperties(bool isConsumable, List<int> propertyTypes, Rarity rarity, Initializer initializer)
         {
             var result = new List<Property>();
             var properties = initializer.GetUsableProperties(propertyTypes);
@@ -41,7 +41,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             var availableExplicitProperties = properties.Where(x => x.ImplicitProperty == false).ToList();
             var explicitPropertyCount = _calculationService.GetRandomInteger(rarity.MinimumExplicitProperties, rarity.MaximumExplicitProperties, false);
 
-            while (explicitPropertyCount > propertiesTaken && availableExplicitProperties.Count > 0)
+            while (explicitPropertyCount > propertiesTaken && availableExplicitProperties.Count > 0 && !isConsumable)
             {
                 var index = _calculationService.GetRandomInteger(0, availableExplicitProperties.Count, true);
                 var propertyToAdd = availableExplicitProperties[index];
@@ -65,7 +65,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             result.MaximumValue = 0;
             result.Value = 0;
 
-            if (property.IsValueRanged)
+            if (property.IsValueRanged && !property.SetStaticValue)
             {
                 result.MinimumValue = _calculationService.GetRandomInteger(property.MinimumValue, (property.MaximumValue / 2), false);
                 result.MaximumValue = _calculationService.GetRandomInteger(property.MaximumValue / 2, property.MaximumValue, false);
@@ -89,7 +89,7 @@ namespace RPG_Item_Generator.Generator.Helpers
         {
             var resultProperty = new Property();
 
-            resultProperty.Id = property.Id;
+            resultProperty.TypeId = property.Id;
             resultProperty.Name = property.Name;
             resultProperty.MinimumValue = propertyValue.MinimumValue;
             resultProperty.MaximumValue = propertyValue.MaximumValue;

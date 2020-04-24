@@ -23,3 +23,14 @@
 
 * Returned Item Object
 	* It's recommended to map this to your own object once you receive the generated item.
+
+* No item is able to generate
+	* Default values on returned item will be... These values should be avoided when generating your definitions, also plan accordingly for this object to be returned.
+		* TypeId -1000
+		* CategoryId -1000
+		* ItemLevel -1000
+		* RarityTypeId -1000
+		* RarityName "Nothing Generated Default RarityName"
+		* ItemName "Nothing Generated Default ItemName"
+		* ItemDescription "Nothing Generated Default ItemDescription"
+		* Properties = empty list

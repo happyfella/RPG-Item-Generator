@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RPG_Item_Generator.Models.External
 {
-    public class RaretyDefinition
+    public class RarityDefinition
     {
         /// <summary>
         /// The Id for the generated property.

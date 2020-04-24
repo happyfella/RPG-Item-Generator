@@ -6,7 +6,7 @@ namespace RPG_Item_Generator.Models.External
 {
     public class ItemGeneratorConfig
     {
-        public ItemGeneratorConfig(List<ItemDefinition> itemDefinitions, List<PropertyDefinition> propertyDefinitions, List<RaretyDefinition> raretyDefinitions)
+        public ItemGeneratorConfig(List<ItemDefinition> itemDefinitions, List<PropertyDefinition> propertyDefinitions, List<RarityDefinition> raretyDefinitions)
         {
             ItemDefinitions = itemDefinitions;
             PropertyDefinitions = propertyDefinitions;
@@ -21,7 +21,7 @@ namespace RPG_Item_Generator.Models.External
         /// <summary>
         /// All Rarity Definitions that are possible.
         /// </summary>
-        public List<RaretyDefinition> RarityDefinitions { get; set; }
+        public List<RarityDefinition> RarityDefinitions { get; set; }
 
         /// <summary>
         /// All Item Definitions that are possible.

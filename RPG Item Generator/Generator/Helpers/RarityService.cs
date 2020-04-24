@@ -19,25 +19,33 @@ namespace RPG_Item_Generator.Generator.Helpers
         public Rarity ChooseRarity(List<int> itemRarety, Initializer initializer)
         {
             var result = new Rarity();
-            var chosenRarity = new RaretyDefinition();
+            var chosenRarity = new RarityDefinition();
 
-            var usableRarities = initializer.GetUsableRarities(itemRarety).OrderByDescending(x => x.DropWeight);
-            var highestRarityValue = usableRarities.FirstOrDefault();
-            var brokerValue = Math.Round(_calculationService.GetRandomDouble(), 2);
-
-            if (brokerValue > highestRarityValue.DropWeight)
+            var usableRarities = initializer.GetUsableRarities(itemRarety).OrderByDescending(x => x.DropWeight).ToList();
+            if(usableRarities.Count > 0)
             {
-                brokerValue = highestRarityValue.DropWeight;
-            }
+                var highestRarityValue = usableRarities.FirstOrDefault();
+                var brokerValue = Math.Round(_calculationService.GetRandomDouble(), 2);
 
-            foreach(var u in usableRarities)
-            {
-
-                if(u.DropWeight >= brokerValue)
+                if (brokerValue > highestRarityValue.DropWeight)
                 {
-                    chosenRarity = u;
+                    brokerValue = highestRarityValue.DropWeight;
+                }
+
+                foreach (var u in usableRarities)
+                {
+
+                    if (u.DropWeight >= brokerValue)
+                    {
+                        chosenRarity = u;
+                    }
                 }
             }
+            else
+            {
+                chosenRarity = initializer.GetHighestDropWeightRarity();
+            }
+            
 
             result.TypeId = chosenRarity.Id;
             result.Name = chosenRarity.Name;

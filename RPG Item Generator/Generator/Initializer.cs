@@ -13,9 +13,9 @@ namespace RPG_Item_Generator.Generator
 
         private List<PropertyDefinition> Properties { get; set; }
 
-        private List<RaretyDefinition> Rarities { get; set; }
+        private List<RarityDefinition> Rarities { get; set; }
 
-        public ConfigValidation Init(ItemGeneratorConfig config)
+        public ValidationResponse Init(ItemGeneratorConfig config)
         {
             var validate = new ConfigValidator(config).Validation();
             if(validate.Passed)
@@ -81,11 +81,17 @@ namespace RPG_Item_Generator.Generator
              // TODO: need to throw an exception here instead of returning false
         }
 
-        public List<RaretyDefinition> GetUsableRarities(List<int> rarityTypes)
+        public List<RarityDefinition> GetUsableRarities(List<int> rarityTypes)
         {
             var result = Rarities.Where(x => rarityTypes.Contains(x.Id)).ToList();
 
             return result;
+        }
+
+        public RarityDefinition GetHighestDropWeightRarity()
+        {
+            var result = Rarities.OrderByDescending(x => x.DropWeight);
+            return result.FirstOrDefault();
         }
     }
 }

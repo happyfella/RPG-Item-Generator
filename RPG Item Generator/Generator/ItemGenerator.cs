@@ -14,7 +14,7 @@ namespace RPG_Item_Generator.Generator
         /// </summary>
         /// <param name="config"></param>
         /// <returns></returns>
-        ConfigValidation Initialize(ItemGeneratorConfig config);
+        ValidationResponse Initialize(ItemGeneratorConfig config);
 
         /// <summary>
         /// Generates an item (consumable and non-consumable) based on the passed in level.
@@ -43,7 +43,7 @@ namespace RPG_Item_Generator.Generator
         /// <param name="level"></param>
         /// <param name="typeId"></param>
         /// <returns></returns>
-        Item GenerateItemOnTypeId(int level, int typeId);
+        Item GenerateItemByTypeId(int level, int typeId);
 
         /// <summary>
         /// Generates an item based on the passed in level and CategoryId.
@@ -51,7 +51,7 @@ namespace RPG_Item_Generator.Generator
         /// <param name="level"></param>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        Item GenerateItemOnCategoryId(int level, int categoryId);
+        Item GenerateItemByCategoryId(int level, int categoryId);
     }
 
     public class ItemGenerator : IItemGenerator
@@ -75,11 +75,19 @@ namespace RPG_Item_Generator.Generator
             _calculationService = new CalculationService();
         }
 
-        public ConfigValidation Initialize(ItemGeneratorConfig config)
+        public ValidationResponse Initialize(ItemGeneratorConfig config)
         {
-            var initialize = _initializer.Init(config);
-            PassedValidation = initialize.Passed;
-            return initialize;
+            try
+            {
+                var initialize = _initializer.Init(config);
+                PassedValidation = initialize.Passed;
+                return initialize;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public Item GenerateItem(int level)
@@ -94,7 +102,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
             
-            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
+            return GenerateDefaultItem();
         }
 
         public Item GenerateNonConsumableItem(int level)
@@ -109,7 +117,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
+            return GenerateDefaultItem();
         }
 
         public Item GenerateConsumableItem(int level)
@@ -124,10 +132,10 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
+            return GenerateDefaultItem();
         }
 
-        public Item GenerateItemOnTypeId(int level, int typeId)
+        public Item GenerateItemByTypeId(int level, int typeId)
         {
             if (PassedValidation)
             {
@@ -139,10 +147,10 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
+            return GenerateDefaultItem();
         }
 
-        public Item GenerateItemOnCategoryId(int level, int categoryId)
+        public Item GenerateItemByCategoryId(int level, int categoryId)
         {
             if (PassedValidation)
             {
@@ -154,7 +162,7 @@ namespace RPG_Item_Generator.Generator
                 }
             }
 
-            return new Item(); // Need to handle this better, what to return if no item was generated or throw custom exception
+            return GenerateDefaultItem();
         }
 
         private Item GetItem(int level, List<ItemDefinition> definitions)
@@ -169,7 +177,7 @@ namespace RPG_Item_Generator.Generator
             var itemLevel = _levelService.GenerateItemLevel(itemDefinition, level);
             var itemRarity = _rarityService.ChooseRarity(itemDefinition.Rarities, _initializer);
             var itemName = _nameService.GenerateItemName(); // TODO: need to dynamicall change the name possibly
-            var itemProperties = _propertyService.GenerateProperties(itemDefinition.Properties, itemRarity, _initializer);
+            var itemProperties = _propertyService.GenerateProperties(itemDefinition.IsConsumable, itemDefinition.Properties, itemRarity, _initializer);
 
             // Map item result
             result.TypeId = itemDefinition.TypeId;
@@ -180,6 +188,22 @@ namespace RPG_Item_Generator.Generator
             result.ItemName = itemDefinition.Name; // TODO: possibly use itemName that was generated
             result.ItemDescription = itemDefinition.Description;
             result.Properties = itemProperties;
+
+            return result;
+        }
+
+        private Item GenerateDefaultItem()
+        {
+            var result = new Item();
+
+            result.TypeId = -1000;
+            result.CategoryId = -1000;
+            result.ItemLevel = -1000;
+            result.RarityTypeId = -1000;
+            result.RarityName = "Nothing Generated Default RarityName";
+            result.ItemName = "Nothing Generated Default ItemName";
+            result.ItemDescription = "Nothing Generated Default ItemDescription";
+            result.Properties = new List<Property>();
 
             return result;
         }

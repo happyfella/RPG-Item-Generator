@@ -1,23 +1,15 @@
 ﻿
 Pending:
-
-
-
-Working:
+	Setup a system to not drop the same type of item one after another
 	Make it so the item level is generated close to the level passed in to the item generator, need to handle through configuration in item definition
 		Needs a range value and flag
 	Item level should work with generated property value, higher level should have a slightly higher property value without exceeding the max value
-	Defensive code in all that is received from the client, handle the issues
 	Dynamic Naming based on properties
-	Add summary comments to models
-	Add Value calculation to Calculation Service
-	Use static value from property definition in calculations for both consumable and non-consumable items. 
+
+Working:
+	Defensive code in all that is received from the client, handle the issues
 	Add sockets to items
-	Setup a system to not drop the same type of item one after another
 	Instead of returning a new item if generation failed, maybe have a list of errors on the Item object that is returned
-	Handle what happends when a no rarities are specified in the Item Definition. Do I even want that to be possible, what about consumable items
-	Ignore Explicit properties for consumables
-	Find a better model name for ConfidValidation
 
 
 Future:
@@ -31,6 +23,15 @@ Complete:
 	Generate Item based on passed in CategoryId
 	Figure out why rarity min property amount isn't working correctly, can have less than the minimum
 	Generated item property count should take the rarity into account, this will go along with the minimum and maximum explicit properties
+	Find a better model name for ConfidValidation
+	Add summary comments to models
+	Add Value calculation to Calculation Service
+	Use static value from property definition in calculations for both consumable and non-consumable items. 
+		static value cannot be used for ranged value properties
+	Add validation for id that are passed in with ItemDefinition but aren't in rarityDefinition or PropertyDefinition
+	If ItemDefinition.Rarities has a count of 0, will default to highest propbable change rarity.
+	Handle what happends when a no rarities are specified in the Item Definition. Do I even want that to be possible, what about consumable items
+	Ignore Explicit properties for consumables
 
 
 Not Doing:
