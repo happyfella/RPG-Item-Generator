@@ -10,6 +10,7 @@
 
 
 * Initialization
+	
 
 
 * Initialization Validation
@@ -17,9 +18,9 @@
 		Will still generate an item even if warnings are present. Will have a Passed value of true.
 	* Hard failures (Erros)
 		Will not generate an item with an error count greater than 0. Will have a Passed value of false.
-	*Consumable Items
+	* Consumable Items
 		Will validate if it has Explicit Properties. They are not intended to have Explicit Properties, as such Explicit Properties will be ignored during item generation.
-
+	* All properties withing all definitions should be initialized, no nulls allowed.
 
 * Returned Item Object
 	* It's recommended to map this to your own object once you receive the generated item.
