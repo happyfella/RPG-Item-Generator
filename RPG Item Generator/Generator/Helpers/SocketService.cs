@@ -16,7 +16,7 @@ namespace RPG_Item_Generator.Generator.Helpers
 
         public int GenerateNumberOfSockets(ItemDefinition definition)
         {
-            if(definition.IsSocketed)
+            if(definition.IsSocketed && !definition.IsConsumable)
             {
                 var result = _calculationService.GetRandomInteger(definition.MinimumSocket, definition.MaximumSocket, false);
                 return result;
