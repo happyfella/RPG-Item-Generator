@@ -62,6 +62,7 @@ namespace RPG_Item_Generator.Generator
         private readonly NameService _nameService;
         private readonly RarityService _rarityService;
         private readonly CalculationService _calculationService;
+        private readonly SocketService _socketService;
 
         private bool PassedValidation { get; set; }
 
@@ -73,6 +74,7 @@ namespace RPG_Item_Generator.Generator
             _nameService = new NameService();
             _rarityService = new RarityService();
             _calculationService = new CalculationService();
+            _socketService = new SocketService();
         }
 
         public ValidationResponse Initialize(ItemGeneratorConfig config)
@@ -176,8 +178,9 @@ namespace RPG_Item_Generator.Generator
             // Generate values
             var itemLevel = _levelService.GenerateItemLevel(itemDefinition, level);
             var itemRarity = _rarityService.ChooseRarity(itemDefinition.Rarities, _initializer);
-            var itemName = _nameService.GenerateItemName(); // TODO: need to dynamicall change the name possibly
+            var itemName = _nameService.GenerateItemName(itemDefinition);
             var itemProperties = _propertyService.GenerateProperties(itemDefinition.IsConsumable, itemDefinition.Properties, itemRarity, _initializer);
+            var sockets = _socketService.GenerateNumberOfSockets(itemDefinition);
 
             // Map item result
             result.TypeId = itemDefinition.TypeId;
@@ -185,8 +188,9 @@ namespace RPG_Item_Generator.Generator
             result.ItemLevel = itemLevel;
             result.RarityTypeId = itemRarity.TypeId;
             result.RarityName = itemRarity.Name;
-            result.ItemName = itemDefinition.Name; // TODO: possibly use itemName that was generated
+            result.ItemName = itemName;
             result.ItemDescription = itemDefinition.Description;
+            result.Sockets = sockets;
             result.Properties = itemProperties;
 
             return result;
@@ -203,6 +207,7 @@ namespace RPG_Item_Generator.Generator
             result.RarityName = "Nothing Generated Default RarityName";
             result.ItemName = "Nothing Generated Default ItemName";
             result.ItemDescription = "Nothing Generated Default ItemDescription";
+            result.Sockets = -1000;
             result.Properties = new List<Property>();
 
             return result;

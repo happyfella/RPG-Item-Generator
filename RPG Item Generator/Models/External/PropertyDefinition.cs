@@ -26,7 +26,7 @@ namespace RPG_Item_Generator.Models.External
         public bool ImplicitProperty { get; set; }
 
         /// <summary>
-        /// Scales the values with help from the item level. Currently not implemented
+        /// CURRENTLY NOT IMPLEMENTED. Scales the values with help from the item level.
         /// </summary>
         public double ValueScale { get; set; }
 
@@ -46,9 +46,9 @@ namespace RPG_Item_Generator.Models.External
         public bool IsValueRanged { get; set; }
 
         /// <summary>
-        /// How often this property will be on an item. Value from 0 to 1
+        /// How rare this property will be on an item. Value from 0 to 1
         /// </summary>
-        public double Wieght { get; set; }
+        public double SelectionWieght { get; set; }
 
         /// <summary>
         /// Hard value that will be set to the property with no additional random generating.

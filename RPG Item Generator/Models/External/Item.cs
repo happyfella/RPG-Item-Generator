@@ -43,6 +43,11 @@ namespace RPG_Item_Generator.Models.External
         public string ItemDescription { get; set; }
 
         /// <summary>
+        /// Generated number of sockets.
+        /// </summary>
+        public int Sockets { get; set; }
+
+        /// <summary>
         /// Generated item properties.
         /// </summary>
         public List<Property> Properties { get; set; }

@@ -55,6 +55,21 @@ namespace RPG_Item_Generator.Models.External
         public bool IsConsumable { get; set; }
 
         /// <summary>
+        /// The minimum amount of sockets able to generate.
+        /// </summary>
+        public int MinimumSocket { get; set; }
+
+        /// <summary>
+        /// The maximum amount of sockets able to generate.
+        /// </summary>
+        public int MaximumSocket { get; set; }
+
+        /// <summary>
+        /// Will the generate item have sockets. MinimumSocket can be set to 0.
+        /// </summary>
+        public bool IsSocketed { get; set; }
+
+        /// <summary>
         /// List of Property Id's that are allowed to be picked for the item when generating.
         /// </summary>
         public List<int> Properties { get; set; }

@@ -67,7 +67,7 @@ namespace RPG_Item_Generator.Generator.Helpers
 
             if (property.IsValueRanged && !property.SetStaticValue)
             {
-                result.MinimumValue = _calculationService.GetRandomInteger(property.MinimumValue, (property.MaximumValue / 2), false);
+                result.MinimumValue = _calculationService.GetRandomInteger(property.MinimumValue, property.MaximumValue / 2, false);
                 result.MaximumValue = _calculationService.GetRandomInteger(property.MaximumValue / 2, property.MaximumValue, false);
             }
             else

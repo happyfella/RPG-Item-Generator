@@ -10,8 +10,8 @@
 
 
 * Initialization
-	
-
+	* MinimumSocket can be set to 0.
+	* Consumable items cannot have sockets. Sockets will be ignored.
 
 * Initialization Validation
 	* Soft failures (Warnings)
@@ -34,4 +34,5 @@
 		* RarityName "Nothing Generated Default RarityName"
 		* ItemName "Nothing Generated Default ItemName"
 		* ItemDescription "Nothing Generated Default ItemDescription"
+		* Sockets -1000
 		* Properties = empty list

@@ -8,8 +8,6 @@ Pending:
 
 Working:
 	Defensive code in all that is received from the client, handle the issues
-	Add sockets to items
-	Add validation for null checks on all properties within all definitions. No value should be null
 
 
 Future:
@@ -33,6 +31,8 @@ Complete:
 	Handle what happends when a no rarities are specified in the Item Definition. Do I even want that to be possible, what about consumable items
 	Ignore Explicit properties for consumables
 	Instead of returning a new item if generation failed, maybe have a list of errors on the Item object that is returned
+	Add validation for null checks on all properties within all definitions. No value should be null (modified)
+	Add sockets to items
 
 
 Not Doing:
