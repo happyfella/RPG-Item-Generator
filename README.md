@@ -1,4 +1,4 @@
-# RPG-Item-Generator
+# Happy's RPG Item Generator
 Simple, universal and configurable RPG item generator. 
 
 ### Documentation
