@@ -2,7 +2,7 @@
 Simple, universal and configurable RPG item generator. 
 
 ### Documentation
-I'm currently creating the documentation within the Wiki tab.
+I'm currently creating the documentation within the Wiki tab. If you see issues with the documentation or any confusion, please email me so I can make the necessary modifications.
 
 ### Other Information
 If you have any questions or would like to provide feedback, feel free to email me at adambennettaz@gmail.com.
