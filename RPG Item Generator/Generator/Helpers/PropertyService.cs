@@ -21,9 +21,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             var result = new List<Property>();
             var properties = initializer.GetUsableProperties(propertyTypes);
 
-            // TODO: take weight into account for both number of properties on the item and the values
-
-            // Implicit properties first
+            // Implicit properties
             var implicitProperties = properties.Where(x => x.ImplicitProperty).ToList();
 
             if(implicitProperties.Count > 0)
@@ -36,7 +34,7 @@ namespace RPG_Item_Generator.Generator.Helpers
                 }
             }
 
-            // Generate explicit properties
+            // Explicit Properties
             var propertiesTaken = 0;
             var availableExplicitProperties = properties.Where(x => x.ImplicitProperty == false).ToList();
             var explicitPropertyCount = _calculationService.GetRandomInteger(rarity.MinimumExplicitProperties, rarity.MaximumExplicitProperties, false);

@@ -3,11 +3,14 @@ Pending:
 	Setup a system to not drop the same type of item one after another
 	Make it so the item level is generated close to the level passed in to the item generator, need to handle through configuration in item definition
 		Needs a range value and flag
-	Item level should work with generated property value, higher level should have a slightly higher property value without exceeding the max value
 	Dynamic Naming based on properties
 	Sockets based on rarity
 
+
 Working:
+	Item level should work with generated property value, higher level should have a slightly higher property value without exceeding the max value
+		ValueScale should be used for this purpose.
+	Create a tool that will take in a txt file and generate the ItemDefinitions, PropertyDefinitions, RarityDefinitions for the config process
 
 
 Future:

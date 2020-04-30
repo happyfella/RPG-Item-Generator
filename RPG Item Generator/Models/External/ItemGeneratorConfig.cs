@@ -13,6 +13,8 @@ namespace RPG_Item_Generator.Models.External
             RarityDefinitions = raretyDefinitions;
         }
 
+        private ItemGeneratorConfig() { }
+
         /// <summary>
         /// All Property Definitions that are possible.
         /// </summary>

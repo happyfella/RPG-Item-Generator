@@ -10,8 +10,7 @@ namespace RPG_Item_Generator.Models.External
     public class PropertyDefinition
     {
         /// <summary>
-        /// Unique Id for the Property Definition. Used for error handling, will not be returned. 
-        /// Unique is not enforced, but will assist if you receive any errors or warnings with a referenced Id.
+        /// Unique Id for the Property Definition.
         /// </summary>
         public int Id { get; set; }
 
@@ -46,7 +45,7 @@ namespace RPG_Item_Generator.Models.External
         public bool IsValueRanged { get; set; }
 
         /// <summary>
-        /// How rare this property will be on an item. Value from 0 to 1
+        /// CURRENTLY NOT IMPLEMENTED. How rare this property will be on an item. Value from 0 to 1
         /// </summary>
         public double SelectionWieght { get; set; }
 

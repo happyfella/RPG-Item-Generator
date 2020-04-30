@@ -7,11 +7,12 @@
 	* IsConsumable is used for items expected as consumable items. Examples... Gold, Health Refills, Mana Refills, Gems. MinimumDropLevel and MaximumDropLevel
 	  still apply for these items. If you want these items to drop through the lifecycle of the game, set the MinimumDropLevel to 1 and set IgnoreMaximumDropLevel
 	  to True. This is not intended for durability, durability should be passed in as a property definition currently if you require it.
-
-
-* Initialization
 	* MinimumSocket can be set to 0.
 	* Consumable items cannot have sockets. Sockets will be ignored.
+
+* Initialization
+	
+	
 
 * Initialization Validation
 	* Soft failures (Warnings)
