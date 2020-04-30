@@ -10,7 +10,7 @@ Pending:
 Working:
 	Item level should work with generated property value, higher level should have a slightly higher property value without exceeding the max value
 		ValueScale should be used for this purpose.
-	Create a tool that will take in a txt file and generate the ItemDefinitions, PropertyDefinitions, RarityDefinitions for the config process
+	Create a tool that will take in a txt file and generate the ItemDefinitions, PropertyDefinitions, RarityDefinitions for the config process.
 
 
 Future:
