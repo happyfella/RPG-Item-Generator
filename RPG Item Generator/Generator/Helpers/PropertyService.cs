@@ -87,7 +87,7 @@ namespace RPG_Item_Generator.Generator.Helpers
         {
             var resultProperty = new Property();
 
-            resultProperty.TypeId = property.Id;
+            resultProperty.Id = property.Id;
             resultProperty.Name = property.Name;
             resultProperty.MinimumValue = propertyValue.MinimumValue;
             resultProperty.MaximumValue = propertyValue.MaximumValue;

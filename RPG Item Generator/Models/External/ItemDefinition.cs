@@ -72,11 +72,11 @@ namespace RPG_Item_Generator.Models.External
         /// <summary>
         /// List of Property Id's that are allowed to be picked for the item when generating.
         /// </summary>
-        public List<int> Properties { get; set; }
+        public List<int> PropertyIds { get; set; }
 
         /// <summary>
         /// List of Rarity Id's that are allowed to be picked for the item when generating.
         /// </summary>
-        public List<int> Rarities { get; set; }
+        public List<int> RarityIds { get; set; }
     }
 }

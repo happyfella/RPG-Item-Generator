@@ -125,7 +125,7 @@ namespace RPG_Item_Generator.Generator.Validation
 
                 // WARNING: Validate if SetStaticValue to false with StaticValue being greater than 0
                 {
-                    var properties = _itemGeneratorConfig.PropertyDefinitions.Where(x => x.SetStaticValue && x.StaticValue > 0).ToList();
+                    var properties = _itemGeneratorConfig.PropertyDefinitions.Where(x => !x.SetStaticValue && x.StaticValue > 0).ToList();
                     if (properties.Count > 0)
                     {
                         foreach (var p in properties)
@@ -152,7 +152,7 @@ namespace RPG_Item_Generator.Generator.Validation
                 {
                     foreach(var d in allDefinitions)
                     {
-                        if(d.Properties == null)
+                        if(d.PropertyIds == null)
                         {
                             Result.Errors.Add($"ERROR: ItemDefinition Id {d.Id} Properties is null.");
                             Result.Passed = false;
@@ -164,7 +164,7 @@ namespace RPG_Item_Generator.Generator.Validation
                 {
                     foreach (var d in allDefinitions)
                     {
-                        if (d.Rarities == null)
+                        if (d.RarityIds == null)
                         {
                             Result.Errors.Add($"ERROR: ItemDefinition Id {d.Id} Rarities is null.");
                             Result.Passed = false;
@@ -201,14 +201,14 @@ namespace RPG_Item_Generator.Generator.Validation
                     var definitions = _itemGeneratorConfig.ItemDefinitions.Where(x => !x.IsConsumable).ToList();
                     foreach (var d in definitions)
                     {
-                        if(d.Properties != null)
+                        if(d.PropertyIds != null)
                         {
-                            var implicitProperties = _itemGeneratorConfig.PropertyDefinitions.Where(x => d.Properties.Contains(x.Id) && x.ImplicitProperty).ToList();
+                            var implicitProperties = _itemGeneratorConfig.PropertyDefinitions.Where(x => d.PropertyIds.Contains(x.Id) && x.ImplicitProperty).ToList();
                             if (implicitProperties.Count < 1)
                             {
                                 Result.Warnings.Add($"WARNING: Item Definition Id {d.Id} has no Implicit Properties.");
                             }
-                            var explicitProperties = _itemGeneratorConfig.PropertyDefinitions.Where(x => d.Properties.Contains(x.Id) && !x.ImplicitProperty).ToList();
+                            var explicitProperties = _itemGeneratorConfig.PropertyDefinitions.Where(x => d.PropertyIds.Contains(x.Id) && !x.ImplicitProperty).ToList();
                             if (explicitProperties.Count < 1)
                             {
                                 Result.Warnings.Add($"WARNING: Item Definition Id {d.Id} has no Explicit Properties.");
@@ -222,9 +222,9 @@ namespace RPG_Item_Generator.Generator.Validation
                     var definitions = _itemGeneratorConfig.ItemDefinitions.Where(x => x.IsConsumable).ToList();
                     foreach(var d in definitions)
                     {
-                        if(d.Properties != null)
+                        if(d.PropertyIds != null)
                         {
-                            var explicitProperties = _itemGeneratorConfig.PropertyDefinitions.Where(x => d.Properties.Contains(x.Id) && !x.ImplicitProperty).ToList();
+                            var explicitProperties = _itemGeneratorConfig.PropertyDefinitions.Where(x => d.PropertyIds.Contains(x.Id) && !x.ImplicitProperty).ToList();
                             if (explicitProperties.Count > 0)
                             {
                                 foreach (var e in explicitProperties)
@@ -240,9 +240,9 @@ namespace RPG_Item_Generator.Generator.Validation
                 {
                     foreach(var d in allDefinitions)
                     {
-                        if(d.Rarities != null)
+                        if(d.RarityIds != null)
                         {
-                            var rarities = _itemGeneratorConfig.RarityDefinitions.Where(x => d.Rarities.Contains(x.Id)).ToList();
+                            var rarities = _itemGeneratorConfig.RarityDefinitions.Where(x => d.RarityIds.Contains(x.Id)).ToList();
                             if (rarities.Count < 1)
                             {
                                 Result.Warnings.Add($"WARNING: Item Definition Id {d.Id} has no Rarities defined. The item will default to the highest DropWeight value");

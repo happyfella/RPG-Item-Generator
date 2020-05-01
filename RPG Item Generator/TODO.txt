@@ -11,6 +11,9 @@ Working:
 	Item level should work with generated property value, higher level should have a slightly higher property value without exceeding the max value
 		ValueScale should be used for this purpose.
 	Create a tool that will take in a txt file and generate the ItemDefinitions, PropertyDefinitions, RarityDefinitions for the config process.
+	Handle what happens if all Rarity drop thresholds are equal but add up to 1. 0.50 and 0.50... 4 * 0.25...
+	Unique items, with a flag. If Unique, all properties in the item definition will populate on the item, the values will generate though
+	Allow for re-initialization
 
 
 Future:

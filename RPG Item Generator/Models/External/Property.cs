@@ -7,9 +7,9 @@ namespace RPG_Item_Generator.Models.External
     public class Property
     {
         /// <summary>
-        /// TypeId from the PropertyDefinition that was passed through the Item Generator.
+        /// Id from the PropertyDefinition that was passed through the Item Generator.
         /// </summary>
-        public int TypeId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Name from the PropertyDefinition that was passed through the Item Generator.

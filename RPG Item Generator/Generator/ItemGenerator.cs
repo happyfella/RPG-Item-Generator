@@ -177,9 +177,9 @@ namespace RPG_Item_Generator.Generator
 
             // Generate values
             var itemLevel = _levelService.GenerateItemLevel(itemDefinition, level);
-            var itemRarity = _rarityService.ChooseRarity(itemDefinition.Rarities, _initializer);
+            var itemRarity = _rarityService.ChooseRarity(itemDefinition.RarityIds, _initializer);
             var itemName = _nameService.GenerateItemName(itemDefinition);
-            var itemProperties = _propertyService.GenerateProperties(itemDefinition.IsConsumable, itemDefinition.Properties, itemRarity, _initializer);
+            var itemProperties = _propertyService.GenerateProperties(itemDefinition.IsConsumable, itemDefinition.PropertyIds, itemRarity, _initializer);
             var sockets = _socketService.GenerateNumberOfSockets(itemDefinition);
 
             // Map item result
