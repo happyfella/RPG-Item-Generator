@@ -40,12 +40,32 @@ namespace RPG_Item_Generator.Generator.Validation
             }
             else
             {
+                var allDefinitions = _itemGeneratorConfig.RarityDefinitions.ToList();
+
                 // ERROR: Validate DropWeight will sum to 1.00
-                var rarityDropWeightSum = _itemGeneratorConfig.RarityDefinitions.Sum(x => x.DropWeight);
-                if(rarityDropWeightSum < 1.00 || rarityDropWeightSum > 1.00)
                 {
-                    Result.Errors.Add($"ERROR: RarityDefinitions DropWeight adds up to {rarityDropWeightSum}. DropWeight should be summed to 1.00.");
-                    Result.Passed = false;
+                    var rarityDropWeightSum = _itemGeneratorConfig.RarityDefinitions.Sum(x => x.DropWeight);
+                    if (rarityDropWeightSum < 1.00 || rarityDropWeightSum > 1.00)
+                    {
+                        Result.Errors.Add($"ERROR: RarityDefinitions DropWeight adds up to {rarityDropWeightSum}. DropWeight should be summed to 1.00.");
+                        Result.Passed = false;
+                    }
+                }
+
+                // WARNING: Validate there are no duplicate DropWeight values
+                {
+                    foreach(var a in allDefinitions)
+                    {
+                        var definitionsWithoutCurrent = allDefinitions.Where(x => x.Id != a.Id).ToList();
+                        foreach(var b in definitionsWithoutCurrent)
+                        {
+                            if(b.DropWeight == a.DropWeight)
+                            {
+                                Result.Warnings.Add($"WARNING: Rarity Id {a.Id} has a duplicate DropWeight with Rarity Id {b.Id}. The system will only generate" +
+                                    $"one of these Rarities and skip the other.");
+                            }
+                        }
+                    }
                 }
             }
         }

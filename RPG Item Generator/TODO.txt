@@ -1,8 +1,6 @@
 ﻿
 Pending:
 	Setup a system to not drop the same type of item one after another
-	Make it so the item level is generated close to the level passed in to the item generator, need to handle through configuration in item definition
-		Needs a range value and flag
 	Dynamic Naming based on properties
 	Sockets based on rarity
 
@@ -11,7 +9,6 @@ Working:
 	Item level should work with generated property value, higher level should have a slightly higher property value without exceeding the max value
 		ValueScale should be used for this purpose.
 	Create a tool that will take in a txt file and generate the ItemDefinitions, PropertyDefinitions, RarityDefinitions for the config process.
-	Handle what happens if all Rarity drop thresholds are equal but add up to 1. 0.50 and 0.50... 4 * 0.25...
 	Unique items, with a flag. If Unique, all properties in the item definition will populate on the item, the values will generate though
 	Allow for re-initialization
 
@@ -40,7 +37,9 @@ Complete:
 	Add validation for null checks on all properties within all definitions. No value should be null (modified)
 	Add sockets to items
 	Defensive code in all that is received from the client, handle the issues
-
+	Make it so the item level is generated close to the level passed in to the item generator, need to handle through configuration in item definition
+		Needs a range value and flag
+	Handle what happens if all Rarity drop thresholds are equal but add up to 1.... 0.50 and 0.50... 4 * 0.25...
 
 Not Doing:
 	

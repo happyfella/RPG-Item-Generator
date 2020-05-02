@@ -6,14 +6,20 @@ namespace RPG_Item_Generator.Models.External
 {
     public class ItemGeneratorConfig
     {
-        public ItemGeneratorConfig(List<ItemDefinition> itemDefinitions, List<PropertyDefinition> propertyDefinitions, List<RarityDefinition> raretyDefinitions)
+        public ItemGeneratorConfig(List<ItemDefinition> itemDefinitions, List<PropertyDefinition> propertyDefinitions, List<RarityDefinition> raretyDefinitions, int itemLevelScale)
         {
             ItemDefinitions = itemDefinitions;
             PropertyDefinitions = propertyDefinitions;
             RarityDefinitions = raretyDefinitions;
+            ItemLevelScale = itemLevelScale;
         }
 
         private ItemGeneratorConfig() { }
+
+        /// <summary>
+        /// Keeps the generated item level +- this value.
+        /// </summary>
+        public int ItemLevelScale { get; set; }
 
         /// <summary>
         /// All Property Definitions that are possible.

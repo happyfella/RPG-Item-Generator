@@ -15,6 +15,8 @@ namespace RPG_Item_Generator.Generator
 
         private List<RarityDefinition> Rarities { get; set; }
 
+        public int ItemLevelScale { get; set; }
+
         public ValidationResponse Init(ItemGeneratorConfig config)
         {
             var validate = new ConfigValidator(config).Validation();
@@ -23,6 +25,7 @@ namespace RPG_Item_Generator.Generator
                 Definitions = config.ItemDefinitions;
                 Properties = config.PropertyDefinitions;
                 Rarities = config.RarityDefinitions;
+                ItemLevelScale = config.ItemLevelScale;
                 return validate;
             }
             else

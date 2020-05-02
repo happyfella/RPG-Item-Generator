@@ -14,9 +14,40 @@ namespace RPG_Item_Generator.Generator.Helpers
             _calculationService = new CalculationService();
         }
 
-        public int GenerateItemLevel(ItemDefinition definition, int level)
+        public int GenerateItemLevel(ItemDefinition definition, int level, int levelScale)
         {
-            var result = _calculationService.GetRandomInteger(definition.MinimumDropLevel, definition.MaximumDropLevel, false);
+            var minimumLevel = level - levelScale;
+            var maximumLevel = level + levelScale;
+
+            if(levelScale > 0)
+            {
+                if (minimumLevel < definition.MinimumDropLevel)
+                {
+                    minimumLevel = definition.MinimumDropLevel;
+                }
+
+                if (maximumLevel > definition.MaximumDropLevel)
+                {
+                    maximumLevel = definition.MaximumDropLevel;
+                }
+            }
+            else
+            {
+                minimumLevel = definition.MinimumDropLevel;
+                maximumLevel = definition.MaximumDropLevel;
+            }
+            
+
+            var result = 0;
+            if(definition.IgnoreMaximumDropLevel)
+            {
+                result = level;
+            }
+            else
+            {
+                result = _calculationService.GetRandomInteger(minimumLevel, maximumLevel, false);
+            }
+            
             return result;
         }
     }
