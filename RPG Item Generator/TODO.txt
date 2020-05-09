@@ -9,8 +9,6 @@ Working:
 	Create a tool that will take in a txt file and generate the ItemDefinitions, PropertyDefinitions, RarityDefinitions for the config process.
 	Unique items, with a flag. If Unique, all properties in the item definition will populate on the item, the values will generate though
 	Allow for re-initialization
-	Remove documentation for PropertyDefinition.ValueScale
-	Add LevelCap, valieation and documentation
 
 
 Future:
