@@ -23,11 +23,22 @@ namespace RPG_Item_Generator.Generator.Validation
 
         public ValidationResponse Validation()
         {
+            GeneralValidation();
             RarityDefinitionValidation();
             PropertyDefinitionValidation();
             ItemDefinitionValidation();
 
             return Result;
+        }
+
+        private void GeneralValidation()
+        {
+            // ERROR: Validate LevelCap is greater than 0
+            if(_itemGeneratorConfig.LevelCap < 1)
+            {
+                Result.Errors.Add("ERROR: LevelCap cannot be less than 1.");
+                Result.Passed = false;
+            }
         }
 
         private void RarityDefinitionValidation()
@@ -199,8 +210,19 @@ namespace RPG_Item_Generator.Generator.Validation
                     {
                         if (d.MaximumSocket < d.MinimumSocket)
                         {
-                            Result.Warnings.Add($"ERROR: Item Definition Id {d.Id} MaximumSocket is less than MinimumSocket.");
+                            Result.Errors.Add($"ERROR: Item Definition Id {d.Id} MaximumSocket is less than MinimumSocket.");
                             Result.Passed = false;
+                        }
+                    }
+                }
+
+                // ERROR: Validate MaximumDropLevel is not greater than LevelCap
+                {
+                    foreach(var a in allDefinitions)
+                    {
+                        if(a.MaximumDropLevel > _itemGeneratorConfig.LevelCap)
+                        {
+                            Result.Warnings.Add($"WARNING: Item Definition Id {a.Id} MaximumDropLevel is greater than LevelCap.");
                         }
                     }
                 }

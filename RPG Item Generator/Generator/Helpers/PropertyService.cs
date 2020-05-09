@@ -16,10 +16,11 @@ namespace RPG_Item_Generator.Generator.Helpers
             _calculationService = new CalculationService();
         }
 
-        public List<Property> GenerateProperties(bool isConsumable, List<int> propertyTypes, Rarity rarity, Initializer initializer)
+        public List<Property> GenerateProperties(int itemLevel, ItemDefinition definition, Rarity rarity, Initializer initializer)
         {
             var result = new List<Property>();
-            var properties = initializer.GetUsableProperties(propertyTypes);
+            var properties = initializer.GetUsableProperties(definition.PropertyIds);
+            var scaler = _calculationService.GetScaledValue(itemLevel, initializer.ItemOverallLevelCap);
 
             // Implicit properties
             var implicitProperties = properties.Where(x => x.ImplicitProperty).ToList();
@@ -28,7 +29,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             {
                 foreach (var i in implicitProperties)
                 {
-                    var propertyValue = GenerateItemPropertyValue(i);
+                    var propertyValue = GenerateItemPropertyValue(scaler, i);
                     var mappedProperty = MapProperty(i, propertyValue);
                     result.Add(mappedProperty);
                 }
@@ -39,11 +40,11 @@ namespace RPG_Item_Generator.Generator.Helpers
             var availableExplicitProperties = properties.Where(x => x.ImplicitProperty == false).ToList();
             var explicitPropertyCount = _calculationService.GetRandomInteger(rarity.MinimumExplicitProperties, rarity.MaximumExplicitProperties, false);
 
-            while (explicitPropertyCount > propertiesTaken && availableExplicitProperties.Count > 0 && !isConsumable)
+            while (explicitPropertyCount > propertiesTaken && availableExplicitProperties.Count > 0 && !definition.IsConsumable)
             {
                 var index = _calculationService.GetRandomInteger(0, availableExplicitProperties.Count, true);
                 var propertyToAdd = availableExplicitProperties[index];
-                var propertyValue = GenerateItemPropertyValue(propertyToAdd);
+                var propertyValue = GenerateItemPropertyValue(scaler, propertyToAdd);
 
                 var property = MapProperty(propertyToAdd, propertyValue);
                 result.Add(property);
@@ -55,7 +56,7 @@ namespace RPG_Item_Generator.Generator.Helpers
             return result;
         }
 
-        private PropertyValue GenerateItemPropertyValue(PropertyDefinition property)
+        private PropertyValue GenerateItemPropertyValue(double scaler, PropertyDefinition property)
         {
             var result = new PropertyValue();
 
@@ -65,8 +66,11 @@ namespace RPG_Item_Generator.Generator.Helpers
 
             if (property.IsValueRanged && !property.SetStaticValue)
             {
-                result.MinimumValue = _calculationService.GetRandomInteger(property.MinimumValue, property.MaximumValue / 2, false);
-                result.MaximumValue = _calculationService.GetRandomInteger(property.MaximumValue / 2, property.MaximumValue, false);
+                var minValue = _calculationService.GetRandomInteger(property.MinimumValue, property.MaximumValue / 2, false) * scaler;
+                var maxValue = _calculationService.GetRandomInteger(property.MaximumValue / 2, property.MaximumValue, false) * scaler;
+
+                result.MinimumValue = (int)Math.Ceiling(minValue);
+                result.MaximumValue = (int)Math.Ceiling(maxValue);
             }
             else
             {
@@ -76,7 +80,8 @@ namespace RPG_Item_Generator.Generator.Helpers
                 }
                 else
                 {
-                    result.Value = _calculationService.GetRandomInteger(property.MinimumValue, property.MaximumValue, false);
+                    var value = _calculationService.GetRandomInteger(property.MinimumValue, property.MaximumValue, false) * scaler;
+                    result.Value = (int)Math.Ceiling(value);
                 }
             }
 

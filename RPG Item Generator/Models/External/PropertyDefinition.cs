@@ -25,11 +25,6 @@ namespace RPG_Item_Generator.Models.External
         public bool ImplicitProperty { get; set; }
 
         /// <summary>
-        /// CURRENTLY NOT IMPLEMENTED. Scales the values with help from the item level.
-        /// </summary>
-        public double ValueScale { get; set; }
-
-        /// <summary>
         /// The generated value will not fall below this value.
         /// </summary>
         public int MinimumValue { get; set; }

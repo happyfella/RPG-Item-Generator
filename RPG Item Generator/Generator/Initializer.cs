@@ -17,6 +17,8 @@ namespace RPG_Item_Generator.Generator
 
         public int ItemLevelScale { get; set; }
 
+        public int ItemOverallLevelCap { get; set; }
+
         public ValidationResponse Init(ItemGeneratorConfig config)
         {
             var validate = new ConfigValidator(config).Validation();
@@ -26,6 +28,7 @@ namespace RPG_Item_Generator.Generator
                 Properties = config.PropertyDefinitions;
                 Rarities = config.RarityDefinitions;
                 ItemLevelScale = config.ItemLevelScale;
+                ItemOverallLevelCap = config.LevelCap;
                 return validate;
             }
             else

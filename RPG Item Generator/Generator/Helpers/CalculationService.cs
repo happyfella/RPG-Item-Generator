@@ -20,5 +20,11 @@ namespace RPG_Item_Generator.Generator.Helpers
             var random = new Random();
             return random.NextDouble();
         }
+
+        public double GetScaledValue(int value, int levelCap)
+        {
+            var result = (double)value / (double)levelCap;
+            return result;
+        }
     }
 }
